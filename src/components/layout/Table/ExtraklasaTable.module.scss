@@ -7,8 +7,29 @@
 
 .headings {
     font-size: 2rem;
+
+    th{
+        padding: 1rem;
+    }
+ 
 }
 
 .rows {
     text-align: center;
+
+    td{
+        padding: .5rem;
+    }
+}
+
+.winner {
+    background-color: greenyellow;
+}
+
+.looser{
+    background-color: red;
+}
+
+.draw{
+    background-color: orange;
 }

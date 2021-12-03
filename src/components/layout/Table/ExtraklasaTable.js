@@ -28,10 +28,27 @@ function ExtraklasaTable(){
       ? 
       home + ':' + away 
       : 
-      'canceled due to COVID';
-  
+      'postponed due to COVID';
   };
 
+  const isWinner =( team, tie, winner) =>{
+    if(tie){
+      return styles.draw;
+    }
+    return team === winner 
+      ? 
+      styles.winner 
+      : 
+      styles.looser;
+  };
+
+  const breakScore = (it) => {
+    if(it.status === 'closed'){
+      return it.period_scores[0].home_score + ' : ' + it.period_scores[0].away_score;
+    } else {
+      return 'postponed';
+    }
+  };
   var count = 1;
 
   if (error) {
@@ -45,9 +62,13 @@ function ExtraklasaTable(){
         <Table striped bordered hover>
           <thead>
             <tr className={styles.headings}>
-              <th></th>
-              <th>Teams</th>
-              <th>Results</th>
+              <th>Match</th>
+              <th>Host</th>
+              <th>Guest</th>
+              <th>Final results</th>
+              <th>Match date</th>
+              <th>Half-Time score</th>
+              <th>Stadium Name</th>
             </tr>
           </thead>
           <tbody>
@@ -55,8 +76,12 @@ function ExtraklasaTable(){
               <tr key={item.id} className={styles.rows}>
             
                 <td>{count++}</td>
-                <td>{item.sport_event.competitors[0].name} vs {item.sport_event.competitors[1].name}</td>
+                <td className={isWinner(item.sport_event.competitors[0].id, item.sport_event_status.match_tie, item.sport_event_status.winner_id)}>{item.sport_event.competitors[0].name}</td>
+                <td className={isWinner(item.sport_event.competitors[1].id, item.sport_event_status.match_tie, item.sport_event_status.winner_id)}>{item.sport_event.competitors[1].name}</td>
                 <td>{isResult(item.sport_event_status.home_score ,item.sport_event_status.away_score)}</td>
+                <td>{item.sport_event.start_time.substr(0,10)}</td>
+                <td>{breakScore(item.sport_event_status)}</td>
+                <td>{item.sport_event.venue.name}</td>
               </tr>
             )}
           
