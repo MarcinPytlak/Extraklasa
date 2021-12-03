@@ -1,8 +1,15 @@
 .container{
-    display: flex;
+
     justify-content: center;
     text-align: center;
-    align-items: center;
+}
+
+.dropdown{
+    top: 0;
+}
+
+.table {
+    align-items: center
 }
 
 .headings {
