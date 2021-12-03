@@ -29,7 +29,7 @@ function ExtraklasaTable(){
           setError(error);
         }
       );
-  }, );
+  }, [urlAddress]);
   const isResult = (home, away) => {
     return home>=0 && away>= 0 
       ? 
@@ -59,7 +59,6 @@ function ExtraklasaTable(){
 
   const handleChange = (event) => {
     setUrlAddress(event.target.value);
-    console.log(event);
   };
 
   var count = 1;
@@ -69,7 +68,6 @@ function ExtraklasaTable(){
   } else if (!isLoaded) {
     return <div>Loading...</div>;
   } else {
-    console.log(items);
     return (
       <div className={styles.container}>
         <div className={styles.dropdown}>
@@ -106,7 +104,6 @@ function ExtraklasaTable(){
             <tbody>
               {items.map(item => 
                 <tr key={item.id} className={styles.rows}>
-            
                   <td>{count++}</td>
                   <td className={isWinner(item.sport_event.competitors[0].id, item.sport_event_status.match_tie, item.sport_event_status.winner_id)}>{item.sport_event.competitors[0].name}</td>
                   <td className={isWinner(item.sport_event.competitors[1].id, item.sport_event_status.match_tie, item.sport_event_status.winner_id)}>{item.sport_event.competitors[1].name}</td>
@@ -116,7 +113,6 @@ function ExtraklasaTable(){
                   <td>{item.sport_event.venue.name}</td>
                 </tr>
               )}
-          
             </tbody>
           </Table>
         </div>
