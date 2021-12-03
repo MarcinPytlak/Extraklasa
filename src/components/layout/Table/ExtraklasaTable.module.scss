@@ -1,42 +1,89 @@
+@import '../../../styles/settings.scss';
+
 .container{
 
     justify-content: center;
     text-align: center;
-}
 
-.dropdown{
-    top: 0;
-}
+    .box{
+        width: 30rem;
 
-.table {
-    align-items: center
-}
-
-.headings {
-    font-size: 2rem;
-
-    th{
-        padding: 1rem;
+        .label{
+            font-size: 1.52rem;
+            font-weight: 600;
+        }
     }
- 
-}
 
-.rows {
-    text-align: center;
-
-    td{
-        padding: .5rem;
+    .table {
+        align-items: center
     }
-}
 
-.winner {
-    background-color: greenyellow;
-}
+    .headings {
+        font-size: 2rem;
 
-.looser{
-    background-color: red;
-}
+        th{
+            padding: 1rem;
+        }
+    
+    }
 
-.draw{
-    background-color: orange;
+    .rows {
+        text-align: center;
+
+        td{
+            padding: .5rem;
+        }
+    }
+
+    .winner {
+        background-color: $color-win;
+    }
+
+    .looser{
+        background-color: $color-loose;
+    }
+
+    .draw{
+        background-color: $color-draw;
+    }
+
+    .enterButton {
+        display: inline-block;
+        border-radius: 20px;
+        border: none;
+        background: $gradient-pattern;
+        text-align: center;
+        font-size: 10px;
+        padding: 10px;
+        width: 100px;
+        transition: $transition;
+        cursor: pointer;
+        justify-content: center;
+        }
+
+        .enterButton span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+        color: white;
+        }
+
+        .enterButton span:after {
+        content: '\00bb';
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -20px;
+        transition: 0.5s;
+        }
+
+        .enterButton:hover span {
+        padding-right: 25px;
+        }
+
+        .enterButton:hover span:after {
+        opacity: 1;
+        right: 0;
+        }
 }

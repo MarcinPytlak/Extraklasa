@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Table } from 'react-bootstrap';
 import styles from './ExtraklasaTable.module.scss';
+import { Link } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -13,7 +14,6 @@ function ExtraklasaTable(){
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
   const [urlAddress , setUrlAddress] = useState('https://api.sportradar.us/soccer/trial/v4/en/seasons/sr:season:77453/schedules.json?api_key=rs86utpab8axq6fkedt5yubf');
-  //const [competitors, setCompetitors] = useState([]);
 
   useEffect(() => {
     fetch(urlAddress)
@@ -21,7 +21,6 @@ function ExtraklasaTable(){
       .then(
         (result) => {
           setItems(result.schedules);
-          //setCompetitors(result.schedules.map(item => item.sport_event));
           setIsLoaded(true);
         },
         (error) => {
@@ -60,7 +59,7 @@ function ExtraklasaTable(){
   const handleChange = (event) => {
     setUrlAddress(event.target.value);
   };
-
+  
   var count = 1;
 
   if (error) {
@@ -72,13 +71,13 @@ function ExtraklasaTable(){
       <div className={styles.container}>
         <div className={styles.dropdown}>
           <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Select season</InputLabel>
+            <FormControl className={styles.box}>
+              <InputLabel id="demo-simple-select-label" className={styles.label}>Select season</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={urlAddress}
-                label="Age"
+                label="Season"
                 onChange={handleChange}
               >
                 <MenuItem value={'https://api.sportradar.us/soccer/trial/v4/en/seasons/sr:season:77453/schedules.json?api_key=rs86utpab8axq6fkedt5yubf'}>Ekstraklasa 20/20</MenuItem>
@@ -111,6 +110,10 @@ function ExtraklasaTable(){
                   <td>{item.sport_event.start_time.substr(0,10)}</td>
                   <td>{breakScore(item.sport_event_status)}</td>
                   <td>{item.sport_event.venue.name}</td>
+                  <td><button className={styles.enterButton}><Link to={{
+                    pathname:'/match',
+                    state: {item},
+                  }}><span>See details</span></Link></button></td>
                 </tr>
               )}
             </tbody>
